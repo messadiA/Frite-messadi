@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chez Messadi - Accueil</title>
+    <style>
+        /* Style global */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        /* Style de la section principale */
+        .hero {
+            height: 100vh;
+            background: url('05.png') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        /* Overlay sombre */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        /* Contenu principal */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        /* Boutons */
+        .hero .cta-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .hero .cta-buttons a {
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #fff;
+            background-color: #e63946;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero .cta-buttons a:hover {
+            background-color: #d62828;
+        }
+
+        /* Style des modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            text-align: left;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .modal-content label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        .modal-content input, .modal-content select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .modal-content button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .validate-btn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .validate-btn:hover {
+            background-color: #218838;
+        }
+
+        .cancel-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background-color: #c82333;
+        }
+
+        .close-modal {
+            background-color: #ccc;
+            color: black;
+            float: right;
+            border: none;
+            font-size: 1rem;
+            padding: 5px 10px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Section principale -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Bienvenue chez Messadi</h1>
+            <p>Frais, croustillant, savoureux. Rien que pour toi.</p>
+            <div class="cta-buttons">
+                <a href="#" id="openReservationModal">Réserver une table</a>
+                <a href="menu.html">Voir le menu</a>
+                <a href="#" id="openOrderModal">Commander maintenant</a>
+		<a href="video.html">Vidéo Publicitaire</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de réservation -->
+    <div class="modal" id="reservationModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeReservationModal">&times;</button>
+            <h2>Réserver une table</h2>
+            <form>
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" name="nom" required>
+
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" name="prenom" required>
+
+                <label for="nombre">Nombre de personnes</label>
+                <input type="number" id="nombre" name="nombre" min="1" required>
+
+                <label for="date">Date souhaitée</label>
+                <input type="date" id="date" name="date" required>
+
+                <label for="heure">Heure souhaitée</label>
+                <input type="time" id="heure" name="heure" required>
+
+                <label for="telephone">Numéro de téléphone</label>
+                <input type="tel" id="telephone" name="telephone" required>
+
+                <label for="email">Adresse email (optionnel)</label>
+                <input type="email" id="email" name="email">
+
+                <button type="submit">Envoyer</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal pour la commande -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <h2>Passer une commande</h2>
+            <form id="orderForm">
+                <label><input type="checkbox" name="menuItem" value="Frites Classiques"> Frites Classiques</label>
+                <label><input type="checkbox" name="menuItem" value="Frites Maison"> Frites Maison</label>
+                <label><input type="checkbox" name="menuItem" value="Frites Douces"> Frites Douces</label>
+                <label><input type="checkbox" name="menuItem" value="Frites Belges"> Frites Belges</label>
+                <label><input type="checkbox" name="menuItem" value="Sauce Andalouse"> Sauce Andalouse</label>
+                <div style="display: flex; justify-content: space-between;">
+                    <button type="button" class="validate-btn" id="validateOrder">Valider la commande</button>
+                    <button type="button" class="cancel-btn" id="cancelOrder">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Gestion des modals
+        const reservationModal = document.getElementById("reservationModal");
+        const orderModal = document.getElementById("orderModal");
+        const openReservationModal = document.getElementById("openReservationModal");
+        const openOrderModal = document.getElementById("openOrderModal");
+        const closeReservationModal = document.getElementById("closeReservationModal");
+        const cancelOrder = document.getElementById("cancelOrder");
+        const validateOrder = document.getElementById("validateOrder");
+
+        openReservationModal.addEventListener("click", (e) => {
+            e.preventDefault();
+            reservationModal.style.display = "flex";
+        });
+
+        closeReservationModal.addEventListener("click", () => {
+            reservationModal.style.display = "none";
+        });
+
+        openOrderModal.addEventListener("click", (e) => {
+            e.preventDefault();
+            orderModal.style.display = "flex";
+        });
+
+        cancelOrder.addEventListener("click", () => {
+            orderModal.style.display = "none";
+        });
+
+        validateOrder.addEventListener("click", () => {
+            const selectedItems = Array.from(document.querySelectorAll("input[name='menuItem']:checked"))
+                .map((checkbox) => checkbox.value);
+
+            if (selectedItems.length === 0) {
+                alert("Veuillez sélectionner au moins un élément !");
+                return;
+            }
+
+            const email = "ahmed.messadi@c-f-maier.de";
+            const subject = encodeURIComponent("Nouvelle commande");
+            const body = encodeURIComponent(`Voici les éléments commandés :\n\n${selectedItems.join("\n")}`);
+
+            // Créer le lien mailto
+            window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+        });
+    </script>
+</body>
+</html>
